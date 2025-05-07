@@ -9,6 +9,7 @@ Actions information and common workflows for Qualcomm Linux repositories.
 | Action     | Description      | POC |
 | ------------- | ------------- |------------- |
 | [qualcomm/commit-emails-check-action](https://github.com/qualcomm/commit-emails-check-action) | GitHub action for checking email addresses in PR/Push commits | @quic-nasserg |
+| [qualcomm/copyright-license-checker-action](https://github.com/qualcomm/copyright-license-checker-action) | GitHub action for copyright and license issues in PR/Push commits | @targoy-qti |
 
 ## Workflows
 
