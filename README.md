@@ -17,7 +17,7 @@ Common, ["reusable workflows"](https://docs.github.com/en/actions/sharing-automa
 
 ### Examples
 
-TBD
+To be determined
 
 ## Rulesets
 
