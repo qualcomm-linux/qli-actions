@@ -14,6 +14,8 @@ Actions information and common workflows for Qualcomm Linux repositories.
 ## Workflows
 
 Common, ["reusable workflows"](https://docs.github.com/en/actions/sharing-automations/reusing-workflows) should go in the `.github/workflows` directory for this repository.
+**Semgrep** Semgrep is an open-source static analysis tool that supports over 30 programming languages. It uses pattern-based rules to find bugs, enforce coding standards, and enhance security.
+SEMGREP_APP_TOKEN is securely passed from GitHub secrets. We would be storing the credentials at org level secret so that none of the maintainer have to provide the secret.
 
 ### Examples
 
