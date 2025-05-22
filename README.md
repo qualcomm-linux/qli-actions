@@ -26,9 +26,9 @@ In order to call multi-checker workflow please add below file to your repository
 name: preflight-checkers 
 on:
   pull_request:
-    branches: [ $default-branch ]
+    branches: ["main", "master"]
   push:
-    branches: [ $default-branch ]
+    branches: ["main", "master"]
   workflow_dispatch:
 
 jobs:
@@ -43,6 +43,16 @@ jobs:
     secrets:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 ```
+OR 
+
+Alternative way to enable in your repo via Action tab workflow templates. Follow below steps
+1. Click on Actions
+2. If you have existing actions in the repo, click "New workflow", else skip to next step
+3. Scroll to `By Qualcomm` section and click `Configure` under `QLI Preflight Checker Workflow`
+4. Click "Start commit" and then "Commit new file" after selecting the appropriate e-mail under "Choose which email address to associate with this commit"
+5. This will create a GitHub Action config file in your repo under the path .github/workflows/preflight-checker.yml
+6. Adjust it as needed, e.g. the preflight-checker action is configured to run on Push and Pull Requests into the main/master branch, but you may want to further adjust when it runs.
+
 If you want to disable semgrep, you can set `semgrep: false` in the `with` section of the workflow. Default value is `true` for all checkers.
 
 ## Rulesets
