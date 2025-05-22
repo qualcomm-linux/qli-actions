@@ -13,11 +13,47 @@ Actions information and common workflows for Qualcomm Linux repositories.
 
 ## Workflows
 
-Common, ["reusable workflows"](https://docs.github.com/en/actions/sharing-automations/reusing-workflows) should go in the `.github/workflows` directory for this repository.
+**multi-checker** This workflow is a reusable workflow to run a series of preflight checks on your code. The checks include:
+
+* **[Repolinter](https://github.com/qualcomm-linux/qli-actions)**: Checks the repository for consistency and adherence to coding standards.
+* **[Semgrep](https://github.com/qualcomm-linux/qli-actions)**: Runs a static analysis tool to detect potential security vulnerabilities and coding errors.
+* **[Copyright-License-Detector](https://github.com/qualcomm/copyright-license-checker-action)**: Checks for proper copyright and licensing information in the code.
+* **[PR-Check-Emails](https://github.com/qualcomm/commit-emails-check-action)**: Verifies that the commit emails are properly formatted.
 
 ### Examples
+In order to call multi-checker workflow please add below file to your repository's under`.github/workflows` directory.
+```
+name: preflight-checkers 
+on:
+  pull_request:
+    branches: ["main", "master"]
+  push:
+    branches: ["main", "master"]
+  workflow_dispatch:
 
-TBD
+jobs:
+  checker:
+    uses: qualcomm-linux/qli-actions/.github/workflows/multi-checker.yml@main
+    with:
+        repolinter: true # default: true
+        semgrep: true # default: true
+        copyright-license-detector: true # default: true
+        pr-check-emails: true # default: true
+
+    secrets:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+```
+OR 
+
+Alternative way to enable in your repo via Action tab workflow templates. Follow below steps
+1. Click on Actions
+2. If you have existing actions in the repo, click "New workflow", else skip to next step
+3. Scroll to `By Qualcomm` section and click `Configure` under `QLI Preflight Checker Workflow`
+4. Click "Start commit" and then "Commit new file" after selecting the appropriate e-mail under "Choose which email address to associate with this commit"
+5. This will create a GitHub Action config file in your repo under the path .github/workflows/preflight-checker.yml
+6. Adjust it as needed, e.g. the preflight-checker action is configured to run on Push and Pull Requests into the main/master branch, but you may want to further adjust when it runs.
+
+If you want to disable semgrep, you can set `semgrep: false` in the `with` section of the workflow. Default value is `true` for all checkers.
 
 ## Rulesets
 
