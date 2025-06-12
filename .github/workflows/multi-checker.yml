@@ -26,6 +26,9 @@ jobs:
     if: ${{ ( inputs.repolinter && contains('pull_request_target', github.event_name) && github.event.action != 'closed' ) }}
     runs-on: ubuntu-latest
     steps:
+      - name: Print repolinter value
+        run: |
+          echo "Repolinter input: ${{ inputs.repolinter }}"
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Verify repolinter config file is present
@@ -52,6 +55,9 @@ jobs:
     container:
       image: semgrep/semgrep
     steps:
+      - name: Print Semgrep value
+        run: |
+          echo "semgrep input: ${{ inputs.semgrep }}"
       - uses: actions/checkout@v4
       - run: semgrep ci --sarif-output=semgrep-report.sarif
         env:
