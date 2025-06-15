@@ -20,6 +20,10 @@ on:
     secrets:
       SEMGREP_APP_TOKEN:
         required: true
+permissions:
+  security-events: write
+  actions: read
+  contents: read
 
 jobs:
   Repolinter:
