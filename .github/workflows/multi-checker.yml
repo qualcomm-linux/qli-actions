@@ -23,7 +23,7 @@ on:
 
 jobs:
   Repolinter:
-    if: ${{ ( inputs.repolinter && contains('pull_request_target', github.event_name) && github.event.action != 'closed' ) }}
+    if: ${{ inputs.repolinter }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
