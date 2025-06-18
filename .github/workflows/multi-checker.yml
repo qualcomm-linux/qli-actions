@@ -20,7 +20,9 @@ on:
     secrets:
       SEMGREP_APP_TOKEN:
         required: true
-
+permissions:
+  contents: read
+  security-events: write
 jobs:
   Repolinter:
     if: ${{ inputs.repolinter }}
@@ -48,8 +50,6 @@ jobs:
     if: ${{ ( inputs.semgrep && contains('pull_request_target', github.event_name) && github.event.action != 'closed' && github.actor != 'dependabot[bot]' ) }}
     name: semgrep/ci
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
 
     container:
       image: semgrep/semgrep:1.125.0
