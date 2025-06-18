@@ -52,7 +52,7 @@ jobs:
       security-events: write
 
     container:
-      image: semgrep/semgrep
+      image: semgrep/semgrep:1.125.0
     steps:
       - uses: actions/checkout@v4
       - run: semgrep ci --sarif-output=semgrep-report.sarif
