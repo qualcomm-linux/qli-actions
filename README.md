@@ -8,8 +8,11 @@ Actions information and common workflows for Qualcomm Linux repositories.
 
 | Action     | Description      | POC |
 | ------------- | ------------- |------------- |
+| repolinter| GitHub action for checking the repository for consistency and adherence to coding standards| @mynameistechno |
+| semgrep| GitHub action for running Semgrep static analysis tool| @njjetha |
 | [qualcomm/commit-emails-check-action](https://github.com/qualcomm/commit-emails-check-action) | GitHub action for checking email addresses in PR/Push commits | @quic-nasserg |
 | [qualcomm/copyright-license-checker-action](https://github.com/qualcomm/copyright-license-checker-action) | GitHub action for copyright and license issues in PR/Push commits | @targoy-qti |
+
 
 ## Workflows
 
@@ -25,10 +28,10 @@ In order to call multi-checker workflow please add below file to your repository
 ```
 name: preflight-checkers 
 on:
-  pull_request:
-    branches: ["main", "master"]
+  pull_request_target:
+    branches: [ "main" ]
   push:
-    branches: ["main", "master"]
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -48,7 +51,7 @@ OR
 Alternative way to enable in your repo via Action tab workflow templates. Follow below steps
 1. Click on Actions
 2. If you have existing actions in the repo, click "New workflow", else skip to next step
-3. Scroll to `By Qualcomm` section and click `Configure` under `QLI Preflight Checker Workflow`
+3. Scroll to `By Qualcomm Linux` section and click `Configure` under `QLI Preflight Checker Workflow`
 4. Click "Start commit" and then "Commit new file" after selecting the appropriate e-mail under "Choose which email address to associate with this commit"
 5. This will create a GitHub Action config file in your repo under the path .github/workflows/preflight-checker.yml
 6. Adjust it as needed, e.g. the preflight-checker action is configured to run on Push and Pull Requests into the main/master branch, but you may want to further adjust when it runs.

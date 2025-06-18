@@ -1,7 +1,7 @@
 name: Semgrep
 
 on:
-  pull_request:
+  pull_request_target:
     branches: ["main", "master"]
   workflow_dispatch: {}
 
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: semgrep/semgrep
+      image: semgrep/semgrep:1.125.0
 
     if: (github.actor != 'dependabot[bot]')
 
